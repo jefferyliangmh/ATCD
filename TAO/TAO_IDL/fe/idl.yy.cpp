@@ -379,7 +379,7 @@ static void yy_fatal_error (yyconst char msg[]  );
  */
 #define YY_DO_BEFORE_ACTION \
         (yytext_ptr) = yy_bp; \
-        tao_yyleng = (size_t) (yy_cp - yy_bp); \
+        tao_yyleng = (int) (yy_cp - yy_bp); \
         (yy_hold_char) = *yy_cp; \
         *yy_cp = '\0'; \
         if ( tao_yyleng >= YYLMAX ) \
@@ -1061,8 +1061,12 @@ static AST_Decl *           idl_find_node (const char *);
 #include "mcpp_yyinput.h"
 #endif /*USE_MCPP_BUFFER_LEXING*/
 
+#if defined __ANDROID__ && defined ECHO
+#undef ECHO
+#endif
+
 /* SO we don't choke on files that use \r\n */
-#line 1069 "fe/idl.yy.cpp"
+#line 1073 "fe/idl.yy.cpp"
 
 #define INITIAL 0
 
@@ -1175,7 +1179,7 @@ static int input (void );
                         buf[n++] = (char) c; \
                 if ( c == EOF && ferror( tao_yyin ) ) \
                         YY_FATAL_ERROR( "input in flex scanner failed" ); \
-                result = n; \
+                result = static_cast<int> (n); \
                 } \
         else \
                 { \
@@ -1248,14 +1252,14 @@ extern int tao_yylex (void);
  */
 YY_DECL
 {
-        register yy_state_type yy_current_state;
-        register char *yy_cp, *yy_bp;
-        register int yy_act;
+        yy_state_type yy_current_state;
+        char *yy_cp, *yy_bp;
+        int yy_act;
 
-#line 118 "fe/idl.ll"
+#line 122 "fe/idl.ll"
 
 
-#line 1262 "fe/idl.yy.cpp"
+#line 1266 "fe/idl.yy.cpp"
 
         if ( !(yy_init) )
                 {
@@ -1300,7 +1304,7 @@ YY_DECL
 yy_match:
                 do
                         {
-                        register YY_CHAR yy_c = yy_ec[YY_SC_TO_UI(*yy_cp)];
+                        YY_CHAR yy_c = yy_ec[YY_SC_TO_UI(*yy_cp)];
                         if ( yy_accept[yy_current_state] )
                                 {
                                 (yy_last_accepting_state) = yy_current_state;
@@ -1337,367 +1341,367 @@ do_action:        /* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 120 "fe/idl.ll"
+#line 124 "fe/idl.ll"
 return IDL_ANY;
         YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 121 "fe/idl.ll"
+#line 125 "fe/idl.ll"
 return IDL_OBJECT;
         YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 122 "fe/idl.ll"
+#line 126 "fe/idl.ll"
 return IDL_MODULE;
         YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 123 "fe/idl.ll"
+#line 127 "fe/idl.ll"
 return IDL_RAISES;
         YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 124 "fe/idl.ll"
+#line 128 "fe/idl.ll"
 return IDL_READONLY;
         YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 125 "fe/idl.ll"
+#line 129 "fe/idl.ll"
 return IDL_ATTRIBUTE;
         YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 126 "fe/idl.ll"
+#line 130 "fe/idl.ll"
 return IDL_EXCEPTION;
         YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 127 "fe/idl.ll"
+#line 131 "fe/idl.ll"
 return IDL_CONTEXT;
         YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 128 "fe/idl.ll"
+#line 132 "fe/idl.ll"
 return IDL_INTERFACE;
         YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 129 "fe/idl.ll"
+#line 133 "fe/idl.ll"
 return IDL_CONST;
         YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 130 "fe/idl.ll"
+#line 134 "fe/idl.ll"
 return IDL_TYPEDEF;
         YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 131 "fe/idl.ll"
+#line 135 "fe/idl.ll"
 return IDL_STRUCT;
         YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 132 "fe/idl.ll"
+#line 136 "fe/idl.ll"
 return IDL_ENUM;
         YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 133 "fe/idl.ll"
+#line 137 "fe/idl.ll"
 return IDL_STRING;
         YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 134 "fe/idl.ll"
+#line 138 "fe/idl.ll"
 return IDL_WSTRING;
         YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 135 "fe/idl.ll"
+#line 139 "fe/idl.ll"
 return IDL_SEQUENCE;
         YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 136 "fe/idl.ll"
+#line 140 "fe/idl.ll"
 return IDL_UNION;
         YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 137 "fe/idl.ll"
+#line 141 "fe/idl.ll"
 return IDL_FIXED;
         YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 138 "fe/idl.ll"
+#line 142 "fe/idl.ll"
 return IDL_SWITCH;
         YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 139 "fe/idl.ll"
+#line 143 "fe/idl.ll"
 return IDL_CASE;
         YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 140 "fe/idl.ll"
+#line 144 "fe/idl.ll"
 return IDL_DEFAULT;
         YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 141 "fe/idl.ll"
+#line 145 "fe/idl.ll"
 return IDL_FLOAT;
         YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 142 "fe/idl.ll"
+#line 146 "fe/idl.ll"
 return IDL_DOUBLE;
         YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 143 "fe/idl.ll"
+#line 147 "fe/idl.ll"
 return IDL_LONG;
         YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 144 "fe/idl.ll"
+#line 148 "fe/idl.ll"
 return IDL_SHORT;
         YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 145 "fe/idl.ll"
+#line 149 "fe/idl.ll"
 return IDL_UNSIGNED;
         YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 146 "fe/idl.ll"
+#line 150 "fe/idl.ll"
 return IDL_CHAR;
         YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 147 "fe/idl.ll"
+#line 151 "fe/idl.ll"
 return IDL_WCHAR;
         YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 148 "fe/idl.ll"
+#line 152 "fe/idl.ll"
 return IDL_BOOLEAN;
         YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 149 "fe/idl.ll"
+#line 153 "fe/idl.ll"
 return IDL_OCTET;
         YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 150 "fe/idl.ll"
+#line 154 "fe/idl.ll"
 return IDL_VOID;
         YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 151 "fe/idl.ll"
+#line 155 "fe/idl.ll"
 return IDL_NATIVE;
         YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 152 "fe/idl.ll"
+#line 156 "fe/idl.ll"
 return IDL_LOCAL;
         YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 153 "fe/idl.ll"
+#line 157 "fe/idl.ll"
 return IDL_ABSTRACT;
         YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 155 "fe/idl.ll"
+#line 159 "fe/idl.ll"
 return IDL_CUSTOM;
         YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 156 "fe/idl.ll"
+#line 160 "fe/idl.ll"
 return IDL_FACTORY;
         YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 157 "fe/idl.ll"
+#line 161 "fe/idl.ll"
 return IDL_PRIVATE;
         YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 158 "fe/idl.ll"
+#line 162 "fe/idl.ll"
 return IDL_PUBLIC;
         YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 159 "fe/idl.ll"
+#line 163 "fe/idl.ll"
 return IDL_SUPPORTS;
         YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 160 "fe/idl.ll"
+#line 164 "fe/idl.ll"
 return IDL_TRUNCATABLE;
         YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 161 "fe/idl.ll"
+#line 165 "fe/idl.ll"
 return IDL_VALUETYPE;
         YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 163 "fe/idl.ll"
+#line 167 "fe/idl.ll"
 return IDL_COMPONENT;
         YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 164 "fe/idl.ll"
+#line 168 "fe/idl.ll"
 return IDL_CONSUMES;
         YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 165 "fe/idl.ll"
+#line 169 "fe/idl.ll"
 return IDL_EMITS;
         YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 166 "fe/idl.ll"
+#line 170 "fe/idl.ll"
 return IDL_EVENTTYPE;
         YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 167 "fe/idl.ll"
+#line 171 "fe/idl.ll"
 return IDL_FINDER;
         YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 168 "fe/idl.ll"
+#line 172 "fe/idl.ll"
 return IDL_GETRAISES;
         YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 169 "fe/idl.ll"
+#line 173 "fe/idl.ll"
 return IDL_HOME;
         YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 170 "fe/idl.ll"
+#line 174 "fe/idl.ll"
 return IDL_IMPORT;
         YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 171 "fe/idl.ll"
+#line 175 "fe/idl.ll"
 return IDL_MULTIPLE;
         YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 172 "fe/idl.ll"
+#line 176 "fe/idl.ll"
 return IDL_PRIMARYKEY;
         YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 173 "fe/idl.ll"
+#line 177 "fe/idl.ll"
 return IDL_PROVIDES;
         YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 174 "fe/idl.ll"
+#line 178 "fe/idl.ll"
 return IDL_PUBLISHES;
         YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 175 "fe/idl.ll"
+#line 179 "fe/idl.ll"
 return IDL_SETRAISES;
         YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 176 "fe/idl.ll"
+#line 180 "fe/idl.ll"
 return IDL_TYPEID;
         YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 177 "fe/idl.ll"
+#line 181 "fe/idl.ll"
 return IDL_TYPEPREFIX;
         YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 178 "fe/idl.ll"
+#line 182 "fe/idl.ll"
 return IDL_USES;
         YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 179 "fe/idl.ll"
+#line 183 "fe/idl.ll"
 return IDL_MANAGES;
         YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 181 "fe/idl.ll"
+#line 185 "fe/idl.ll"
 return IDL_TYPENAME;
         YY_BREAK
 case 60:
 YY_RULE_SETUP
-#line 182 "fe/idl.ll"
+#line 186 "fe/idl.ll"
 return IDL_PORT;
         YY_BREAK
 case 61:
 YY_RULE_SETUP
-#line 183 "fe/idl.ll"
+#line 187 "fe/idl.ll"
 return IDL_MIRRORPORT;
         YY_BREAK
 case 62:
 YY_RULE_SETUP
-#line 184 "fe/idl.ll"
+#line 188 "fe/idl.ll"
 return IDL_PORTTYPE;
         YY_BREAK
 case 63:
 YY_RULE_SETUP
-#line 185 "fe/idl.ll"
+#line 189 "fe/idl.ll"
 return IDL_CONNECTOR;
         YY_BREAK
 case 64:
 YY_RULE_SETUP
-#line 186 "fe/idl.ll"
+#line 190 "fe/idl.ll"
 return IDL_ALIAS;
         YY_BREAK
 case 65:
 YY_RULE_SETUP
-#line 188 "fe/idl.ll"
+#line 192 "fe/idl.ll"
 return IDL_TRUETOK;
         YY_BREAK
 case 66:
 YY_RULE_SETUP
-#line 189 "fe/idl.ll"
+#line 193 "fe/idl.ll"
 return IDL_FALSETOK;
         YY_BREAK
 case 67:
 YY_RULE_SETUP
-#line 191 "fe/idl.ll"
+#line 195 "fe/idl.ll"
 return IDL_INOUT;
         YY_BREAK
 case 68:
 YY_RULE_SETUP
-#line 192 "fe/idl.ll"
+#line 196 "fe/idl.ll"
 return IDL_IN;
         YY_BREAK
 case 69:
 YY_RULE_SETUP
-#line 193 "fe/idl.ll"
+#line 197 "fe/idl.ll"
 return IDL_OUT;
         YY_BREAK
 case 70:
 YY_RULE_SETUP
-#line 194 "fe/idl.ll"
+#line 198 "fe/idl.ll"
 return IDL_ONEWAY;
         YY_BREAK
 case 71:
 YY_RULE_SETUP
-#line 196 "fe/idl.ll"
+#line 200 "fe/idl.ll"
 return IDL_LEFT_SHIFT;
         YY_BREAK
 case 72:
 YY_RULE_SETUP
-#line 197 "fe/idl.ll"
+#line 201 "fe/idl.ll"
 return IDL_RIGHT_SHIFT;
         YY_BREAK
 case 73:
 YY_RULE_SETUP
-#line 198 "fe/idl.ll"
+#line 202 "fe/idl.ll"
 {
                   tao_yylval.strval = ACE::strnew ("::");
                   return IDL_SCOPE_DELIMITOR;
@@ -1705,7 +1709,7 @@ YY_RULE_SETUP
         YY_BREAK
 case 74:
 YY_RULE_SETUP
-#line 203 "fe/idl.ll"
+#line 207 "fe/idl.ll"
 {
   // Make sure that this identifier is not a C++ keyword. If it is,
   // prepend it with a _cxx_. Lookup in the perfect hash table for C++
@@ -1741,7 +1745,7 @@ YY_RULE_SETUP
         YY_BREAK
 case 75:
 YY_RULE_SETUP
-#line 236 "fe/idl.ll"
+#line 240 "fe/idl.ll"
 {
                   tao_yylval.dval = idl_atof (ace_yytext);
                   return IDL_FLOATING_PT_LITERAL;
@@ -1749,7 +1753,7 @@ YY_RULE_SETUP
         YY_BREAK
 case 76:
 YY_RULE_SETUP
-#line 240 "fe/idl.ll"
+#line 244 "fe/idl.ll"
 {
                   tao_yylval.dval = idl_atof (ace_yytext);
                   return IDL_FLOATING_PT_LITERAL;
@@ -1757,7 +1761,7 @@ YY_RULE_SETUP
         YY_BREAK
 case 77:
 YY_RULE_SETUP
-#line 245 "fe/idl.ll"
+#line 249 "fe/idl.ll"
 {
                   tao_yylval.fixval = ACE_CDR::Fixed::from_string (ace_yytext);
                   return IDL_FIXED_PT_LITERAL;
@@ -1765,7 +1769,7 @@ YY_RULE_SETUP
         YY_BREAK
 case 78:
 YY_RULE_SETUP
-#line 250 "fe/idl.ll"
+#line 254 "fe/idl.ll"
 {
                   tao_yylval.ival = idl_atoi (ace_yytext, 10);
                   return IDL_INTEGER_LITERAL;
@@ -1773,7 +1777,7 @@ YY_RULE_SETUP
         YY_BREAK
 case 79:
 YY_RULE_SETUP
-#line 254 "fe/idl.ll"
+#line 258 "fe/idl.ll"
 {
                   tao_yylval.uival = idl_atoui (ace_yytext, 10);
                   return IDL_UINTEGER_LITERAL;
@@ -1781,7 +1785,7 @@ YY_RULE_SETUP
         YY_BREAK
 case 80:
 YY_RULE_SETUP
-#line 258 "fe/idl.ll"
+#line 262 "fe/idl.ll"
 {
                   tao_yylval.ival = idl_atoi (ace_yytext, 16);
                   return IDL_INTEGER_LITERAL;
@@ -1789,7 +1793,7 @@ YY_RULE_SETUP
         YY_BREAK
 case 81:
 YY_RULE_SETUP
-#line 262 "fe/idl.ll"
+#line 266 "fe/idl.ll"
 {
                   tao_yylval.uival = idl_atoui (ace_yytext, 16);
                   return IDL_UINTEGER_LITERAL;
@@ -1797,7 +1801,7 @@ YY_RULE_SETUP
         YY_BREAK
 case 82:
 YY_RULE_SETUP
-#line 266 "fe/idl.ll"
+#line 270 "fe/idl.ll"
 {
                   tao_yylval.ival = idl_atoi (ace_yytext, 8);
                   return IDL_INTEGER_LITERAL;
@@ -1805,7 +1809,7 @@ YY_RULE_SETUP
         YY_BREAK
 case 83:
 YY_RULE_SETUP
-#line 270 "fe/idl.ll"
+#line 274 "fe/idl.ll"
 {
                   tao_yylval.uival = idl_atoui (ace_yytext, 8);
                   return IDL_UINTEGER_LITERAL;
@@ -1814,7 +1818,7 @@ YY_RULE_SETUP
 case 84:
 /* rule 84 can match eol */
 YY_RULE_SETUP
-#line 275 "fe/idl.ll"
+#line 279 "fe/idl.ll"
 {
                   /* Skip the quotes */
                   char * const tmp = ace_yytext;
@@ -1839,7 +1843,7 @@ YY_RULE_SETUP
 case 85:
 /* rule 85 can match eol */
 YY_RULE_SETUP
-#line 295 "fe/idl.ll"
+#line 299 "fe/idl.ll"
 {
                   /* Skip the bookends */
                   char * const tmp = ACE_OS::strdup (ace_yytext);
@@ -1861,7 +1865,7 @@ YY_RULE_SETUP
         YY_BREAK
 case 86:
 YY_RULE_SETUP
-#line 313 "fe/idl.ll"
+#line 317 "fe/idl.ll"
 {
                   tao_yylval.cval = ace_yytext[1];
                   return IDL_CHARACTER_LITERAL;
@@ -1869,7 +1873,7 @@ YY_RULE_SETUP
         YY_BREAK
 case 87:
 YY_RULE_SETUP
-#line 317 "fe/idl.ll"
+#line 321 "fe/idl.ll"
 {
                   // octal character constant
                   tao_yylval.cval = idl_escape_reader (ace_yytext + 1);
@@ -1878,7 +1882,7 @@ YY_RULE_SETUP
         YY_BREAK
 case 88:
 YY_RULE_SETUP
-#line 322 "fe/idl.ll"
+#line 326 "fe/idl.ll"
 {
                   // hexadecimal character constant
                   tao_yylval.cval = idl_escape_reader (ace_yytext + 1);
@@ -1887,7 +1891,7 @@ YY_RULE_SETUP
         YY_BREAK
 case 89:
 YY_RULE_SETUP
-#line 327 "fe/idl.ll"
+#line 331 "fe/idl.ll"
 {
                   tao_yylval.cval = idl_escape_reader (ace_yytext + 1);
                   return IDL_CHARACTER_LITERAL;
@@ -1895,7 +1899,7 @@ YY_RULE_SETUP
         YY_BREAK
 case 90:
 YY_RULE_SETUP
-#line 331 "fe/idl.ll"
+#line 335 "fe/idl.ll"
 {
                   // wide character constant
                   tao_yylval.wcval = ace_yytext[2];
@@ -1904,7 +1908,7 @@ YY_RULE_SETUP
         YY_BREAK
 case 91:
 YY_RULE_SETUP
-#line 336 "fe/idl.ll"
+#line 340 "fe/idl.ll"
 {
                   // hexadecimal wide character constant
                   tao_yylval.wcval = idl_wchar_escape_reader (ace_yytext + 2);
@@ -1913,11 +1917,11 @@ YY_RULE_SETUP
         YY_BREAK
 case 92:
 /* rule 92 can match eol */
-#line 342 "fe/idl.ll"
+#line 346 "fe/idl.ll"
 case 93:
 /* rule 93 can match eol */
 YY_RULE_SETUP
-#line 342 "fe/idl.ll"
+#line 346 "fe/idl.ll"
 {/* remember pragma */
                   idl_global->set_lineno (idl_global->lineno () + 1);
                   idl_store_pragma (ace_yytext);
@@ -1926,11 +1930,11 @@ YY_RULE_SETUP
         YY_BREAK
 case 94:
 /* rule 94 can match eol */
-#line 348 "fe/idl.ll"
+#line 352 "fe/idl.ll"
 case 95:
 /* rule 95 can match eol */
 YY_RULE_SETUP
-#line 348 "fe/idl.ll"
+#line 352 "fe/idl.ll"
 {/* ignore file */
                   idl_global->set_lineno(idl_global->lineno () + 1);
                   break;
@@ -1938,11 +1942,11 @@ YY_RULE_SETUP
         YY_BREAK
 case 96:
 /* rule 96 can match eol */
-#line 353 "fe/idl.ll"
+#line 357 "fe/idl.ll"
 case 97:
 /* rule 97 can match eol */
 YY_RULE_SETUP
-#line 353 "fe/idl.ll"
+#line 357 "fe/idl.ll"
 {
                   idl_parse_line_and_file (ace_yytext);
                   break;
@@ -1950,11 +1954,11 @@ YY_RULE_SETUP
         YY_BREAK
 case 98:
 /* rule 98 can match eol */
-#line 358 "fe/idl.ll"
+#line 362 "fe/idl.ll"
 case 99:
 /* rule 99 can match eol */
 YY_RULE_SETUP
-#line 358 "fe/idl.ll"
+#line 362 "fe/idl.ll"
 {
                   idl_parse_line_and_file (ace_yytext);
                   break;
@@ -1962,11 +1966,11 @@ YY_RULE_SETUP
         YY_BREAK
 case 100:
 /* rule 100 can match eol */
-#line 363 "fe/idl.ll"
+#line 367 "fe/idl.ll"
 case 101:
 /* rule 101 can match eol */
 YY_RULE_SETUP
-#line 363 "fe/idl.ll"
+#line 367 "fe/idl.ll"
 {
                   idl_parse_line_and_file (ace_yytext);
                   break;
@@ -1974,11 +1978,11 @@ YY_RULE_SETUP
         YY_BREAK
 case 102:
 /* rule 102 can match eol */
-#line 368 "fe/idl.ll"
+#line 372 "fe/idl.ll"
 case 103:
 /* rule 103 can match eol */
 YY_RULE_SETUP
-#line 368 "fe/idl.ll"
+#line 372 "fe/idl.ll"
 {
                   idl_parse_line_and_file (ace_yytext);
                   break;
@@ -1986,11 +1990,11 @@ YY_RULE_SETUP
         YY_BREAK
 case 104:
 /* rule 104 can match eol */
-#line 373 "fe/idl.ll"
+#line 377 "fe/idl.ll"
 case 105:
 /* rule 105 can match eol */
 YY_RULE_SETUP
-#line 373 "fe/idl.ll"
+#line 377 "fe/idl.ll"
 {
                   /* ignore cpp ident */
                   idl_global->set_lineno (idl_global->lineno () + 1);
@@ -2000,7 +2004,7 @@ YY_RULE_SETUP
 case 106:
 /* rule 106 can match eol */
 YY_RULE_SETUP
-#line 378 "fe/idl.ll"
+#line 382 "fe/idl.ll"
 {
                   /* ignore comments */
                   idl_global->set_lineno(idl_global->lineno () + 1);
@@ -2009,7 +2013,7 @@ YY_RULE_SETUP
         YY_BREAK
 case 107:
 YY_RULE_SETUP
-#line 383 "fe/idl.ll"
+#line 387 "fe/idl.ll"
 {
                   for (;;)
                     {
@@ -2032,13 +2036,13 @@ YY_RULE_SETUP
         YY_BREAK
 case 108:
 YY_RULE_SETUP
-#line 402 "fe/idl.ll"
+#line 406 "fe/idl.ll"
 break;
         YY_BREAK
 case 109:
 /* rule 109 can match eol */
 YY_RULE_SETUP
-#line 403 "fe/idl.ll"
+#line 407 "fe/idl.ll"
 {
                   idl_global->set_lineno (idl_global->lineno () + 1);
                   break;
@@ -2046,15 +2050,15 @@ YY_RULE_SETUP
         YY_BREAK
 case 110:
 YY_RULE_SETUP
-#line 407 "fe/idl.ll"
+#line 411 "fe/idl.ll"
 return ace_yytext[0];
         YY_BREAK
 case 111:
 YY_RULE_SETUP
-#line 409 "fe/idl.ll"
+#line 413 "fe/idl.ll"
 ECHO;
         YY_BREAK
-#line 2061 "fe/idl.yy.cpp"
+#line 2065 "fe/idl.yy.cpp"
 case YY_STATE_EOF(INITIAL):
         yyterminate();
 
@@ -2197,9 +2201,9 @@ case YY_STATE_EOF(INITIAL):
  */
 static int yy_get_next_buffer (void)
 {
-            register char *dest = YY_CURRENT_BUFFER_LVALUE->yy_ch_buf;
-        register char *source = (yytext_ptr);
-        register int number_to_move, i;
+        char *dest = YY_CURRENT_BUFFER_LVALUE->yy_ch_buf;
+        char *source = (yytext_ptr);
+        int number_to_move, i;
         int ret_val;
 
         if ( (yy_c_buf_p) > &YY_CURRENT_BUFFER_LVALUE->yy_ch_buf[(yy_n_chars) + 1] )
@@ -2241,8 +2245,8 @@ static int yy_get_next_buffer (void)
 
         else
                 {
-                        int num_to_read =
-                        YY_CURRENT_BUFFER_LVALUE->yy_buf_size - number_to_move - 1;
+                        int num_to_read = (int)
+                        (YY_CURRENT_BUFFER_LVALUE->yy_buf_size - number_to_move - 1);
 
                 while ( num_to_read <= 0 )
                         { /* Not enough room in the buffer - grow it. */
@@ -2255,7 +2259,7 @@ static int yy_get_next_buffer (void)
 
                         if ( b->yy_is_our_buffer )
                                 {
-                                int new_size = b->yy_buf_size * 2;
+                                int new_size = (int)(b->yy_buf_size * 2);
 
                                 if ( new_size <= 0 )
                                         b->yy_buf_size += b->yy_buf_size / 8;
@@ -2276,8 +2280,8 @@ static int yy_get_next_buffer (void)
 
                         (yy_c_buf_p) = &b->yy_ch_buf[yy_c_buf_p_offset];
 
-                        num_to_read = YY_CURRENT_BUFFER_LVALUE->yy_buf_size -
-                                                number_to_move - 1;
+                        num_to_read = (int)(YY_CURRENT_BUFFER_LVALUE->yy_buf_size -
+                                                number_to_move - 1);
 
                         }
 
@@ -2331,15 +2335,15 @@ static int yy_get_next_buffer (void)
 
     static yy_state_type yy_get_previous_state (void)
 {
-        register yy_state_type yy_current_state;
-        register char *yy_cp;
+        yy_state_type yy_current_state;
+        char *yy_cp;
 
         yy_current_state = (yy_start);
         yy_current_state += YY_AT_BOL();
 
         for ( yy_cp = (yytext_ptr) + YY_MORE_ADJ; yy_cp < (yy_c_buf_p); ++yy_cp )
                 {
-                register YY_CHAR yy_c = (*yy_cp ? yy_ec[YY_SC_TO_UI(*yy_cp)] : 1);
+                YY_CHAR yy_c = (*yy_cp ? yy_ec[YY_SC_TO_UI(*yy_cp)] : 1);
                 if ( yy_accept[yy_current_state] )
                         {
                         (yy_last_accepting_state) = yy_current_state;
@@ -2364,10 +2368,10 @@ static int yy_get_next_buffer (void)
  */
     static yy_state_type yy_try_NUL_trans  (yy_state_type yy_current_state )
 {
-        register int yy_is_jam;
-            register char *yy_cp = (yy_c_buf_p);
+        int yy_is_jam;
+        char *yy_cp = (yy_c_buf_p);
 
-        register YY_CHAR yy_c = 1;
+        YY_CHAR yy_c = 1;
         if ( yy_accept[yy_current_state] )
                 {
                 (yy_last_accepting_state) = yy_current_state;
@@ -2385,9 +2389,9 @@ static int yy_get_next_buffer (void)
         return yy_is_jam ? 0 : yy_current_state;
 }
 
-    static void yyunput (int c, register char * yy_bp )
+    static void yyunput (int c, char * yy_bp )
 {
-        register char *yy_cp;
+    char *yy_cp;
 
     yy_cp = (yy_c_buf_p);
 
@@ -2397,10 +2401,10 @@ static int yy_get_next_buffer (void)
         if ( yy_cp < YY_CURRENT_BUFFER_LVALUE->yy_ch_buf + 2 )
                 { /* need to shift things up to make room */
                 /* +2 for EOB chars. */
-                register int number_to_move = (yy_n_chars) + 2;
-                register char *dest = &YY_CURRENT_BUFFER_LVALUE->yy_ch_buf[
+                int number_to_move = (yy_n_chars) + 2;
+                char *dest = &YY_CURRENT_BUFFER_LVALUE->yy_ch_buf[
                                         YY_CURRENT_BUFFER_LVALUE->yy_buf_size + 2];
-                register char *source =
+                char *source =
                                 &YY_CURRENT_BUFFER_LVALUE->yy_ch_buf[number_to_move];
 
                 while ( source > YY_CURRENT_BUFFER_LVALUE->yy_ch_buf )
@@ -2409,7 +2413,7 @@ static int yy_get_next_buffer (void)
                 yy_cp += (int) (dest - source);
                 yy_bp += (int) (dest - source);
                 YY_CURRENT_BUFFER_LVALUE->yy_n_chars =
-                        (yy_n_chars) = YY_CURRENT_BUFFER_LVALUE->yy_buf_size;
+                        (yy_n_chars) = static_cast<int> (YY_CURRENT_BUFFER_LVALUE->yy_buf_size);
 
                 if ( yy_cp < YY_CURRENT_BUFFER_LVALUE->yy_ch_buf + 2 )
                         YY_FATAL_ERROR( "flex scanner push-back overflow" );
@@ -2446,7 +2450,7 @@ static int yy_get_next_buffer (void)
 
                 else
                         { /* need more input */
-                        int offset = (yy_c_buf_p) - (yytext_ptr);
+                        int offset = static_cast<int> ((yy_c_buf_p) - (yytext_ptr));
                         ++(yy_c_buf_p);
 
                         switch ( yy_get_next_buffer(  ) )
@@ -2747,7 +2751,7 @@ static void tao_yyensure_buffer_stack (void)
                 /* Increase the buffer to prepare for a possible push. */
                 int grow_size = 8 /* arbitrary grow size */;
 
-                num_to_alloc = (yy_buffer_stack_max) + grow_size;
+                num_to_alloc = static_cast<int> (yy_buffer_stack_max) + grow_size;
                 (yy_buffer_stack) = (struct yy_buffer_state**)tao_yyrealloc
                                                                 ((yy_buffer_stack),
                                                                 num_to_alloc * sizeof(struct yy_buffer_state*)
@@ -2785,7 +2789,7 @@ YY_BUFFER_STATE tao_yy_scan_buffer  (char * base, yy_size_t  size )
         b->yy_buf_pos = b->yy_ch_buf = base;
         b->yy_is_our_buffer = 0;
         b->yy_input_file = 0;
-        b->yy_n_chars = b->yy_buf_size;
+        b->yy_n_chars = static_cast<int> (b->yy_buf_size);
         b->yy_is_interactive = 0;
         b->yy_at_bol = 1;
         b->yy_fill_buffer = 0;
@@ -2807,7 +2811,7 @@ YY_BUFFER_STATE tao_yy_scan_buffer  (char * base, yy_size_t  size )
 YY_BUFFER_STATE tao_yy_scan_string (yyconst char * yystr )
 {
 
-        return tao_yy_scan_bytes(yystr,strlen(yystr) );
+        return tao_yy_scan_bytes(yystr, static_cast<int> (strlen(yystr)) );
 }
 
 /** Setup the input buffer state to scan the given bytes. The next call to tao_yylex() will
@@ -3011,7 +3015,7 @@ int tao_yylex_destroy  (void)
 #ifndef yytext_ptr
 static void yy_flex_strncpy (char* s1, yyconst char * s2, int n )
 {
-        register int i;
+        int i;
         for ( i = 0; i < n; ++i )
                 s1[i] = s2[i];
 }
@@ -3020,7 +3024,7 @@ static void yy_flex_strncpy (char* s1, yyconst char * s2, int n )
 #ifdef YY_NEED_STRLEN
 static int yy_flex_strlen (yyconst char * s )
 {
-        register int n;
+        int n;
         for ( n = 0; s[n]; ++n )
                 ;
 
@@ -3052,7 +3056,7 @@ void tao_yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 409 "fe/idl.ll"
+#line 413 "fe/idl.ll"
 
 
         /* subroutines */
@@ -3911,7 +3915,7 @@ idl_get_pragma_string (char *pragma)
       return 0;
     }
 
-  int len = end - start;
+  int len = static_cast<int> (end - start);
   char *retval = 0;
 
   ACE_NEW_RETURN (retval,

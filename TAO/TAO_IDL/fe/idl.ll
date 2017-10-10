@@ -107,6 +107,10 @@ static AST_Decl *           idl_find_node (const char *);
 #include "mcpp_yyinput.h"
 #endif /*USE_MCPP_BUFFER_LEXING*/
 
+#if defined __ANDROID__ && defined ECHO
+#undef ECHO
+#endif
+
 %}
 
 /* SO we don't choke on files that use \r\n */
@@ -1263,7 +1267,7 @@ idl_get_pragma_string (char *pragma)
       return 0;
     }
 
-  int len = end - start;
+  int len = static_cast<int> (end - start);
   char *retval = 0;
 
   ACE_NEW_RETURN (retval,

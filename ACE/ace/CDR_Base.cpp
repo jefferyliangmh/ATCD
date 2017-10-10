@@ -110,25 +110,22 @@ ACE_CDR::swap_2_array (char const * orig, char* target, size_t n)
           __asm mov 4[edx], ebx;
 #elif ACE_SIZEOF_LONG == 8
           // 64 bit architecture.
-          ACE_REGISTER unsigned long a =
-            * reinterpret_cast<const unsigned long*> (orig);
+          unsigned long a = * reinterpret_cast<const unsigned long*> (orig);
 
-          ACE_REGISTER unsigned long a1 = (a & 0x00ff00ff00ff00ffUL) << 8;
-          ACE_REGISTER unsigned long a2 = (a & 0xff00ff00ff00ff00UL) >> 8;
+          unsigned long a1 = (a & 0x00ff00ff00ff00ffUL) << 8;
+          unsigned long a2 = (a & 0xff00ff00ff00ff00UL) >> 8;
 
           a = (a1 | a2);
 
           * reinterpret_cast<unsigned long*> (target) = a;
 #else
-          ACE_REGISTER ACE_UINT32 a =
-            * reinterpret_cast<const ACE_UINT32*> (orig);
-          ACE_REGISTER ACE_UINT32 b =
-            * reinterpret_cast<const ACE_UINT32*> (orig + 4);
+          ACE_UINT32 a = * reinterpret_cast<const ACE_UINT32*> (orig);
+          ACE_UINT32 b = * reinterpret_cast<const ACE_UINT32*> (orig + 4);
 
-          ACE_REGISTER ACE_UINT32 a1 = (a & 0x00ff00ffU) << 8;
-          ACE_REGISTER ACE_UINT32 b1 = (b & 0x00ff00ffU) << 8;
-          ACE_REGISTER ACE_UINT32 a2 = (a & 0xff00ff00U) >> 8;
-          ACE_REGISTER ACE_UINT32 b2 = (b & 0xff00ff00U) >> 8;
+          ACE_UINT32 a1 = (a & 0x00ff00ffU) << 8;
+          ACE_UINT32 b1 = (b & 0x00ff00ffU) << 8;
+          ACE_UINT32 a2 = (a & 0xff00ff00U) >> 8;
+          ACE_UINT32 b2 = (b & 0xff00ff00U) >> 8;
 
           a = (a1 | a2);
           b = (b1 | b2);
@@ -181,11 +178,10 @@ ACE_CDR::swap_2_array (char const * orig, char* target, size_t n)
           __asm mov 4[edx], bx;
 #elif ACE_SIZEOF_LONG == 8
           // 64 bit architecture.
-          ACE_REGISTER unsigned long a =
-            * reinterpret_cast<const unsigned long*> (orig);
+          unsigned long a = * reinterpret_cast<const unsigned long*> (orig);
 
-          ACE_REGISTER unsigned long a1 = (a & 0x00ff00ff00ff00ffUL) << 8;
-          ACE_REGISTER unsigned long a2 = (a & 0xff00ff00ff00ff00UL) >> 8;
+          unsigned long a1 = (a & 0x00ff00ff00ff00ffUL) << 8;
+          unsigned long a2 = (a & 0xff00ff00ff00ff00UL) >> 8;
 
           a = (a1 | a2);
 
@@ -206,15 +202,13 @@ ACE_CDR::swap_2_array (char const * orig, char* target, size_t n)
           * reinterpret_cast<ACE_UINT16*> (target + 6) = b4;
 #endif
 #else
-          ACE_REGISTER ACE_UINT32 a =
-            * reinterpret_cast<const ACE_UINT32*> (orig);
-          ACE_REGISTER ACE_UINT32 b =
-            * reinterpret_cast<const ACE_UINT32*> (orig + 4);
+          ACE_UINT32 a = * reinterpret_cast<const ACE_UINT32*> (orig);
+          ACE_UINT32 b = * reinterpret_cast<const ACE_UINT32*> (orig + 4);
 
-          ACE_REGISTER ACE_UINT32 a1 = (a & 0x00ff00ff) << 8;
-          ACE_REGISTER ACE_UINT32 b1 = (b & 0x00ff00ff) << 8;
-          ACE_REGISTER ACE_UINT32 a2 = (a & 0xff00ff00) >> 8;
-          ACE_REGISTER ACE_UINT32 b2 = (b & 0xff00ff00) >> 8;
+          ACE_UINT32 a1 = (a & 0x00ff00ff) << 8;
+          ACE_UINT32 b1 = (b & 0x00ff00ff) << 8;
+          ACE_UINT32 a2 = (a & 0xff00ff00) >> 8;
+          ACE_UINT32 b2 = (b & 0xff00ff00) >> 8;
 
           a = (a1 | a2);
           b = (b1 | b2);
@@ -248,10 +242,12 @@ ACE_CDR::swap_2_array (char const * orig, char* target, size_t n)
     ACE_CDR::swap_2 (orig, target);
     orig += 2;
     target += 2;
+    // fallthrough
   case 2:
     ACE_CDR::swap_2 (orig, target);
     orig += 2;
     target += 2;
+    // fallthrough
   case 1:
     ACE_CDR::swap_2 (orig, target);
   }
@@ -296,10 +292,8 @@ ACE_CDR::swap_4_array (char const * orig, char* target, size_t n)
     {
       while (orig < end)
         {
-          ACE_REGISTER unsigned long a =
-            * reinterpret_cast<const long*> (orig);
-          ACE_REGISTER unsigned long b =
-            * reinterpret_cast<const long*> (orig + 8);
+          unsigned long a = * reinterpret_cast<const long*> (orig);
+          unsigned long b = * reinterpret_cast<const long*> (orig + 8);
 
 #if defined(ACE_HAS_INTEL_ASSEMBLY)
           asm ("bswapq %1" : "=r" (a) : "0" (a));
@@ -307,14 +301,14 @@ ACE_CDR::swap_4_array (char const * orig, char* target, size_t n)
           asm ("rol $32, %1" : "=r" (a) : "0" (a));
           asm ("rol $32, %1" : "=r" (b) : "0" (b));
 #else
-          ACE_REGISTER unsigned long a84 = (a & 0x000000ff000000ffL) << 24;
-          ACE_REGISTER unsigned long b84 = (b & 0x000000ff000000ffL) << 24;
-          ACE_REGISTER unsigned long a73 = (a & 0x0000ff000000ff00L) << 8;
-          ACE_REGISTER unsigned long b73 = (b & 0x0000ff000000ff00L) << 8;
-          ACE_REGISTER unsigned long a62 = (a & 0x00ff000000ff0000L) >> 8;
-          ACE_REGISTER unsigned long b62 = (b & 0x00ff000000ff0000L) >> 8;
-          ACE_REGISTER unsigned long a51 = (a & 0xff000000ff000000L) >> 24;
-          ACE_REGISTER unsigned long b51 = (b & 0xff000000ff000000L) >> 24;
+          unsigned long a84 = (a & 0x000000ff000000ffL) << 24;
+          unsigned long b84 = (b & 0x000000ff000000ffL) << 24;
+          unsigned long a73 = (a & 0x0000ff000000ff00L) << 8;
+          unsigned long b73 = (b & 0x0000ff000000ff00L) << 8;
+          unsigned long a62 = (a & 0x00ff000000ff0000L) >> 8;
+          unsigned long b62 = (b & 0x00ff000000ff0000L) >> 8;
+          unsigned long a51 = (a & 0xff000000ff000000L) >> 24;
+          unsigned long b51 = (b & 0xff000000ff000000L) >> 24;
 
           a = (a84 | a73 | a62 | a51);
           b = (b84 | b73 | b62 | b51);
@@ -332,10 +326,8 @@ ACE_CDR::swap_4_array (char const * orig, char* target, size_t n)
       // We are out of luck, we have to write in 4 byte chunks.
       while (orig < end)
         {
-          ACE_REGISTER unsigned long a =
-            * reinterpret_cast<const long*> (orig);
-          ACE_REGISTER unsigned long b =
-            * reinterpret_cast<const long*> (orig + 8);
+          unsigned long a = * reinterpret_cast<const long*> (orig);
+          unsigned long b = * reinterpret_cast<const long*> (orig + 8);
 
 #if defined(ACE_HAS_INTEL_ASSEMBLY)
           asm ("bswapq %1" : "=r" (a) : "0" (a));
@@ -343,14 +335,14 @@ ACE_CDR::swap_4_array (char const * orig, char* target, size_t n)
           asm ("rol $32, %1" : "=r" (a) : "0" (a));
           asm ("rol $32, %1" : "=r" (b) : "0" (b));
 #else
-          ACE_REGISTER unsigned long a84 = (a & 0x000000ff000000ffL) << 24;
-          ACE_REGISTER unsigned long b84 = (b & 0x000000ff000000ffL) << 24;
-          ACE_REGISTER unsigned long a73 = (a & 0x0000ff000000ff00L) << 8;
-          ACE_REGISTER unsigned long b73 = (b & 0x0000ff000000ff00L) << 8;
-          ACE_REGISTER unsigned long a62 = (a & 0x00ff000000ff0000L) >> 8;
-          ACE_REGISTER unsigned long b62 = (b & 0x00ff000000ff0000L) >> 8;
-          ACE_REGISTER unsigned long a51 = (a & 0xff000000ff000000L) >> 24;
-          ACE_REGISTER unsigned long b51 = (b & 0xff000000ff000000L) >> 24;
+          unsigned long a84 = (a & 0x000000ff000000ffL) << 24;
+          unsigned long b84 = (b & 0x000000ff000000ffL) << 24;
+          unsigned long a73 = (a & 0x0000ff000000ff00L) << 8;
+          unsigned long b73 = (b & 0x0000ff000000ff00L) << 8;
+          unsigned long a62 = (a & 0x00ff000000ff0000L) >> 8;
+          unsigned long b62 = (b & 0x00ff000000ff0000L) >> 8;
+          unsigned long a51 = (a & 0xff000000ff000000L) >> 24;
+          unsigned long b51 = (b & 0xff000000ff000000L) >> 24;
 
           a = (a84 | a73 | a62 | a51);
           b = (b84 | b73 | b62 | b51);
@@ -382,14 +374,10 @@ ACE_CDR::swap_4_array (char const * orig, char* target, size_t n)
   while (orig < end)
     {
 #if defined (ACE_HAS_PENTIUM) && defined (__GNUG__)
-      ACE_REGISTER unsigned int a =
-        *reinterpret_cast<const unsigned int*> (orig);
-      ACE_REGISTER unsigned int b =
-        *reinterpret_cast<const unsigned int*> (orig + 4);
-      ACE_REGISTER unsigned int c =
-        *reinterpret_cast<const unsigned int*> (orig + 8);
-      ACE_REGISTER unsigned int d =
-        *reinterpret_cast<const unsigned int*> (orig + 12);
+      unsigned int a = *reinterpret_cast<const unsigned int*> (orig);
+      unsigned int b = *reinterpret_cast<const unsigned int*> (orig + 4);
+      unsigned int c = *reinterpret_cast<const unsigned int*> (orig + 8);
+      unsigned int d = *reinterpret_cast<const unsigned int*> (orig + 12);
 
       asm ("bswap %1" : "=r" (a) : "0" (a));
       asm ("bswap %1" : "=r" (b) : "0" (b));
@@ -418,14 +406,10 @@ ACE_CDR::swap_4_array (char const * orig, char* target, size_t n)
       __asm mov 8[esi], ebx
       __asm mov 12[esi], eax
 #else
-      ACE_REGISTER ACE_UINT32 a =
-        * reinterpret_cast<const ACE_UINT32*> (orig);
-      ACE_REGISTER ACE_UINT32 b =
-        * reinterpret_cast<const ACE_UINT32*> (orig + 4);
-      ACE_REGISTER ACE_UINT32 c =
-        * reinterpret_cast<const ACE_UINT32*> (orig + 8);
-      ACE_REGISTER ACE_UINT32 d =
-        * reinterpret_cast<const ACE_UINT32*> (orig + 12);
+      ACE_UINT32 a = * reinterpret_cast<const ACE_UINT32*> (orig);
+      ACE_UINT32 b = * reinterpret_cast<const ACE_UINT32*> (orig + 4);
+      ACE_UINT32 c = * reinterpret_cast<const ACE_UINT32*> (orig + 8);
+      ACE_UINT32 d = * reinterpret_cast<const ACE_UINT32*> (orig + 12);
 
       // Expect the optimizer reordering this A LOT.
       // We leave it this way for clarity.
@@ -452,10 +436,12 @@ ACE_CDR::swap_4_array (char const * orig, char* target, size_t n)
     ACE_CDR::swap_4 (orig, target);
     orig += 4;
     target += 4;
+    // fallthrough
   case 2:
     ACE_CDR::swap_4 (orig, target);
     orig += 4;
     target += 4;
+    // fallthrough
   case 1:
     ACE_CDR::swap_4 (orig, target);
   }
@@ -642,7 +628,7 @@ ACE_CDR::LongDouble::assign (const ACE_CDR::LongDouble::NativeImpl& rhs)
         {
           exponent = 0x7fff;
         }
-      else
+      else if (exponent) // exponent 0 stays 0 in 128-bit
         {
           exponent = (exponent - max_eleven_bit) + max_fifteen_bit;
         }
@@ -735,7 +721,7 @@ ACE_CDR::LongDouble::operator ACE_CDR::LongDouble::NativeImpl () const
         {
           exponent = 0x7ff;
         }
-      else
+      else if (exponent) // exponent 0 stays 0 in 64-bit
         {
           exponent = (exponent - max_fifteen_bit) + max_eleven_bit;
         }
@@ -843,14 +829,16 @@ ACE_CDR::Fixed ACE_CDR::Fixed::from_integer (ACE_CDR::ULongLong val)
 
 ACE_CDR::Fixed ACE_CDR::Fixed::from_floating (LongDouble val)
 {
-#ifdef NONNATIVE_LONGDOUBLE
+#if defined ACE_OPENVMS || (defined ACE_VXWORKS && !defined __RTP__)
+  typedef double BigFloat;
+#elif defined NONNATIVE_LONGDOUBLE
   typedef LongDouble::NativeImpl BigFloat;
 #else
   typedef LongDouble BigFloat;
 #endif
 
   Fixed f;
-  f.digits_ = 0;
+  f.digits_ = f.scale_ = 0;
   bool negative = false;
   if (val < 0)
     {
@@ -859,9 +847,13 @@ ACE_CDR::Fixed ACE_CDR::Fixed::from_floating (LongDouble val)
     }
 
   // How many digits are to the left of the decimal point?
-  const size_t digits_left = static_cast<size_t> (1 + std::log10 (val));
+  const size_t digits_left =
+    static_cast<size_t> (1 + ((val > 0) ? std::log10 (val) : 0));
   if (digits_left > MAX_DIGITS)
-    return f;
+    {
+      ACE_OS::memset (f.value_, 0, sizeof f.value_);
+      return f;
+    }
 
   f.digits_ = MAX_DIGITS;
   f.scale_ = 0;
@@ -871,6 +863,8 @@ ACE_CDR::Fixed ACE_CDR::Fixed::from_floating (LongDouble val)
   // Insert the integer part from least to most significant
   int idx = (static_cast<int> (digits_left) + 1) / 2 - 1;
   bool high = digits_left % 2;
+  if (idx >= 0)
+    f.value_[idx] = 0;
   for (size_t i = 0; i < digits_left; ++i, high = !high)
     {
       const Octet digit = static_cast<Octet> (std::fmod (int_part, 10));
@@ -909,42 +903,25 @@ void ACE_CDR::Fixed::normalize (UShort min_scale)
   if (this->value_[15] & 0xf0 || !this->scale_)
     return;
 
-  size_t bytes = 0; // number of bytes to shift down
-  while (2 * (bytes + 1) < this->scale_
-         && this->scale_ - 2 * (bytes + 1) >= min_scale
-         && !this->value_[14 - bytes])
-    ++bytes;
+  // Calculate the number of nibbles that can be moved.
+  ACE_CDR::Octet nibbles = 0;
+  while (this->digit(nibbles) == 0 && this->scale_ - nibbles > min_scale)
+    ++nibbles;
 
-  const bool extra_nibble = 2 * (bytes + 1) <= this->scale_
-                            && this->scale_ - 2 * (bytes + 1) >= min_scale
-                            && !(this->value_[14 - bytes] & 0xf);
-  const size_t nibbles = 1 /*[15].high*/ + bytes * 2 + extra_nibble;
-  this->digits_ -= static_cast<Octet> (nibbles);
-  this->scale_ -= static_cast<Octet> (nibbles);
+  // Move and clear the nibbles.
+  for (ACE_CDR::Octet idx = nibbles; idx != this->digits_; ++idx) {
+    this->digit (idx - nibbles, this->digit (idx));
+    this->digit (idx, 0);
+  }
 
-  if (extra_nibble)
-    {
-      const bool sign = this->sign ();
-      std::memmove (this->value_ + bytes + 1, this->value_, 15 - bytes);
-      std::memset (this->value_, 0, bytes + 1);
-      this->value_[15] |= sign ? NEGATIVE : POSITIVE;
-    }
-  else
-    {
-      this->value_[15] = (this->value_[14 - bytes] & 0xf) << 4
-                         | (this->value_[15] & 0xf);
-      for (size_t i = 14; i > bytes; --i)
-        this->value_[i] = (this->value_[i - bytes - 1] & 0xf) << 4
-                          | (this->value_[i - bytes] >> 4);
-      this->value_[bytes] = this->value_[0] >> 4;
-      std::memset (this->value_, 0, bytes);
-    }
+  this->scale_ -= nibbles;
+  this->digits_ -= nibbles;
 }
 
 ACE_CDR::Fixed ACE_CDR::Fixed::from_string (const char *str)
 {
-  const bool negative = str && *str == '-';
-  if (negative || (str && *str == '+'))
+  const bool negative = *str == '-';
+  if (negative || *str == '+')
     ++str;
 
   const size_t span = ACE_OS::strspn (str, ".0123456789");
@@ -972,6 +949,9 @@ ACE_CDR::Fixed ACE_CDR::Fixed::from_string (const char *str)
         f.value_[idx] = digit;
       ++f.digits_;
     }
+
+  if (!f.scale_ && str[span - f.digits_ - 1] == '.')
+    f.scale_ = f.digits_;
 
   if (idx >= 0)
     ACE_OS::memset (f.value_, 0, idx + !high);
@@ -1149,14 +1129,16 @@ ACE_CDR::Fixed::ConstIterator ACE_CDR::Fixed::pre_add (const ACE_CDR::Fixed &f)
 
   if (f.digits_ - f.scale_ > this->digits_ - this->scale_)
     {
-      this->digits_ += f.digits_ - f.scale_ - this->digits_ + this->scale_;
-      if (this->digits_ > MAX_DIGITS)
+      ACE_CDR::Octet new_digits = this->digits_ + (f.digits_ - f.scale_) - (this->digits_ - this->scale_);
+      if (new_digits > MAX_DIGITS)
         {
-          for (size_t i = 0; i < static_cast<size_t> (this->digits_ - MAX_DIGITS); ++i)
+          for (size_t i = 0; i < static_cast<size_t> (new_digits - MAX_DIGITS); ++i)
             this->digit (static_cast<int> (i), 0);
-          this->normalize (this->scale_ - MAX_DIGITS - this->digits_);
+          this->normalize (this->scale_ - (new_digits - MAX_DIGITS));
           this->digits_ = MAX_DIGITS;
         }
+      else
+        this->digits_ = new_digits;
     }
   return rhs_iter;
 }
@@ -1212,6 +1194,7 @@ int ACE_CDR::Fixed::lshift (int digits)
     if (this->value_[bytes])
       break;
 
+  int shifted = 0;
   if ((digits % 2) && !(this->value_[bytes] & 0xf0))
     {
       for (int i = 0; i < 15 - bytes; ++i)
@@ -1219,21 +1202,26 @@ int ACE_CDR::Fixed::lshift (int digits)
                           | (this->value_[i + bytes + 1] >> 4);
       std::memset (this->value_ + 15 - bytes, 0, bytes);
       this->value_[15] &= 0xf;
-      this->digits_ += 2 * bytes + 1;
-      this->scale_ += 2 * bytes + 1;
-      return 2 * bytes + 1;
+      shifted = 2 * bytes + 1;
     }
   else if (bytes)
     {
-      std::memmove (this->value_, this->value_ + bytes, 15 - bytes);
+      std::memmove (this->value_, this->value_ + bytes, 16 - bytes);
       this->value_[15] &= 0xf;
-      std::memset (this->value_ + 14 - bytes, 0, bytes - 1);
+      std::memset (this->value_ + 16 - bytes, 0, bytes - 1);
       this->value_[15 - bytes] &= 0xf0;
-      this->digits_ += 2 * bytes;
-      this->scale_ += 2 * bytes;
-      return 2 * bytes;
+      shifted = 2 * bytes;
     }
-  return 0;
+
+  this->digits_ += shifted;
+  if (this->digits_ > MAX_DIGITS)
+    this->digits_ = MAX_DIGITS;
+
+  this->scale_ += shifted;
+  if (this->scale_ > MAX_DIGITS)
+    this->scale_ = MAX_DIGITS;
+
+  return shifted;
 }
 
 ACE_CDR::Fixed &ACE_CDR::Fixed::operator-= (const Fixed &rhs)
@@ -1280,12 +1268,7 @@ ACE_CDR::Fixed &ACE_CDR::Fixed::operator-= (const Fixed &rhs)
   if (borrow)
     return *this = -(rhs - before);
 
-  for (int i = this->digits_ - 1; i > 0; --i)
-    if (this->digit (i) == 0)
-      --this->digits_;
-    else
-      break;
-
+  this->ltrim ();
   return *this;
 }
 
@@ -1296,20 +1279,24 @@ ACE_CDR::Fixed &ACE_CDR::Fixed::operator*= (const Fixed &rhs)
   else if (this->sign () && rhs.sign ())
     this->value_[15] = (this->value_[15] & 0xf0) | POSITIVE;
 
+  this->ltrim ();
+  Fixed right = rhs;
+  right.ltrim ();
+
   Octet temp[MAX_DIGITS * 2];
   int carry = 0;
 
-  for (int col = 0; col < this->digits_ + rhs.digits_; ++col)
+  for (int col = 0; col < this->digits_ + right.digits_; ++col)
     {
       for (int row = (std::max) (0, col - this->digits_ + 1);
-           row < (std::min) (col + 1, int (rhs.digits_)); ++row)
-        carry += this->digit (col - row) * rhs.digit (row);
+           row < (std::min) (col + 1, int (right.digits_)); ++row)
+        carry += this->digit (col - row) * right.digit (row);
       temp[col] = carry % 10;
       carry /= 10;
     }
 
-  this->digits_ += rhs.digits_;
-  this->scale_ += rhs.scale_;
+  this->digits_ += right.digits_;
+  this->scale_ += right.scale_;
   int digit_offset = 0;
 
   if (this->digits_ > MAX_DIGITS)
@@ -1323,12 +1310,7 @@ ACE_CDR::Fixed &ACE_CDR::Fixed::operator*= (const Fixed &rhs)
   for (int i = 0; i < this->digits_; ++i)
     this->digit (i, temp[i + digit_offset]);
 
-  for (int i = this->digits_ - 1; i > 0; --i)
-    if (this->digit (i) == 0)
-      --this->digits_;
-    else
-      break;
-
+  this->ltrim ();
   return *this;
 }
 
@@ -1340,25 +1322,30 @@ ACE_CDR::Fixed &ACE_CDR::Fixed::operator/= (const Fixed &rhs)
   if (rhs.scale_ && rhs.scale_ <= this->scale_)
     this->scale_ -= rhs.scale_;
   else if (rhs.scale_)
-    this->scale_ -= this->lshift (rhs.scale_ - this->scale_);
+    {
+      const Octet shifted = this->lshift (rhs.scale_ - this->scale_);
+      this->scale_ -= shifted;
+    }
 
   Fixed rhs_no_scale = rhs;
   rhs_no_scale.scale_ = 0;
   rhs_no_scale.value_[15] = (rhs_no_scale.value_[15] & 0xf0) | POSITIVE;
-  for (int i = rhs_no_scale.digits_ - 1; i > 0; --i)
-    if (rhs_no_scale.digit (i) == 0)
-      --rhs_no_scale.digits_;
-    else
-      break;
+  rhs_no_scale.ltrim ();
+
+  this->ltrim ();
 
   if (!this->sign () && rhs.sign ())
     this->value_[15] = (this->value_[15] & 0xf0) | NEGATIVE;
   else if (this->sign () && rhs.sign ())
     this->value_[15] = (this->value_[15] & 0xf0) | POSITIVE;
 
-  static const Fixed two = from_integer (LongLong (2)),
+  static const Fixed one = from_integer (LongLong (1)),
+    two = from_integer (LongLong (2)),
     three = from_integer (LongLong (3)),
     five = from_integer (LongLong (5));
+
+  if (rhs_no_scale == one)
+    return *this;
 
   // Most sig digit of rhs must be >= 5
   switch (rhs_no_scale.digit (rhs_no_scale.digits_ - 1))
@@ -1378,17 +1365,23 @@ ACE_CDR::Fixed &ACE_CDR::Fixed::operator/= (const Fixed &rhs)
   if (neg)
     this->value_[15] = (this->value_[15] & 0xf0) | POSITIVE;
 
-  Fixed r, q = this->div_helper2 (rhs_no_scale, r);
+  Fixed r;
+  Fixed q = this->div_helper2 (rhs_no_scale, r);
+  q.scale_ = this->scale_;
 
-  if (!r)
-    return *this = neg ? -q : q;;
+  if (!r) {
+    *this = neg ? -q : q;
+    this->normalize ();
+    return *this;
+  }
 
-  const int shift = this->lshift (MAX_DIGITS);
+  const int shift = q.lshift (MAX_DIGITS);
   if (shift)
     {
       const Octet scale = r.lshift (shift);
       r.scale_ = 0;
-      r /= rhs_no_scale;
+      Fixed r2;
+      r = r.div_helper2 (rhs_no_scale, r2);
       r.scale_ = scale;
       q += r;
     }
@@ -1444,6 +1437,7 @@ ACE_CDR::Fixed ACE_CDR::Fixed::div_helper1 (const Fixed &rhs, Fixed &r) const
   if (q > 9)
     q = 9;
   Fixed t = from_integer (LongLong (q)) * rhs;
+  t.scale_ = this->scale_;
   for (int i = 0; i < 2 && t > *this; ++i)
     {
       --q;
